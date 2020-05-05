@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 
 import java.io.IOException;
@@ -51,17 +53,19 @@ public class MainActivity extends AppCompatActivity {
 
 class MyTask extends AsyncTask<Void, Void, Void> {
     String s = "";
+    Elements elements;
     @Override
     protected Void doInBackground(Void... voids) {
         Document doc = null;
         try {
-            doc = Jsoup.connect("https://www.facebook.com").get();
+            doc = Jsoup.connect("https://minfin.com.ua/ua/currency/usd/").get();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         if (doc!=null)
-            s = doc.title();
+           {elements = doc.getElementsByClass("mfm-grey-bg").select("table").select("tr").select("span");
+               s = elements.toString();}
         else
             s = "Ошибка";
 
