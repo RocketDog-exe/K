@@ -65,6 +65,9 @@ class MyTask extends AsyncTask<Void, Void, Void> {
 
         if (doc!=null)
            {elements = doc.getElementsByClass("mfm-grey-bg").select("table").select("tr").select("span");
+               for (Element span : elements) {
+                if (span.getClass().toString()=="mfm-posr") s = span.toString();
+               }
                s = elements.toString();}
         else
             s = "Ошибка";
